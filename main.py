@@ -32,7 +32,7 @@ for i in range(len(df) - 2):
         print("First close price: ", df['close'][i])
         print("Next Close Price: ", df['close'][i+1])
         print("Profit: " + str(df['close'][i+1] - df['close'][i]))
-        profit += df['close'][i+1] - df['close'][i]
+        profit += (df['close'][i+1] - df['close'][i])
         profitl.append(df['close'][i] - df['close'][i+1])
         
     elif df['Close_diff'][i] < df['Close_diff'].mean() - 2*df['Close_diff'].std():
@@ -41,7 +41,7 @@ for i in range(len(df) - 2):
         print("First close price: ", df['close'][i])
         print("Next Close Price: ", df['close'][i+1])
         print("Profit: " + str(df['close'][i+1] - df['close'][i]))
-        profit += df['close'][i+1] - df['close'][i]
+        profit += (df['close'][i+1] - df['close'][i])
         profitl.append(df['close'][i+1] - df['close'][i])
     else:
         print("Nothing")
