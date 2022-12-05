@@ -5,7 +5,7 @@ import datetime as dt
 import time as t
 import random
 
-#take all of the data from the csv file and put it into a dataframe
+
 df = pd.read_csv('AAPL_data.csv')
 
 
@@ -70,7 +70,7 @@ print("Win rate: %" + str(win_rate/len(profitl)))
 #plot close_diff and the df[date] values
 plt.plot(df['date'], df['Close_diff'])
 
-#plot every df['close'] price /100 color black
+
 plt.plot(df['date'], (df['close']/100)**(-1/2), color = 'black')
 
 #plot the close_diff mean
