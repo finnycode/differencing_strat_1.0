@@ -31,6 +31,9 @@ df = df[['date', 'Close_diff', 'close']]
 
 profitl = []
 profit = 0
+short_trades = 0
+long_trades = 0
+win_rate = 0
 #for every price in close_diff, if it is above or below its mean + 2*std, then print it and its date and next df['close'] value + profit and such
 for i in range(len(df) - 2):
     if df['Close_diff'][i] > df['Close_diff'].mean() + 2*df['Close_diff'].std():
@@ -41,7 +44,9 @@ for i in range(len(df) - 2):
         print("Profit: " + str(df['close'][i] - df['close'][i+2]))
         profit += (df['close'][i] - df['close'][i+2])
         profitl.append(df['close'][i] - df['close'][i+2])
-        
+        short_trades += 1
+        if profitl[-1] > 0:
+            win_rate += 1
     elif df['Close_diff'][i] < df['Close_diff'].mean() - 2*df['Close_diff'].std():
         print("Below")
         print(df['date'][i], df['Close_diff'][i])
@@ -50,12 +55,18 @@ for i in range(len(df) - 2):
         print("Profit: " + str(df['close'][i+2] - df['close'][i]))
         profit += (df['close'][i+2] - df['close'][i])
         profitl.append(df['close'][i+2] - df['close'][i])
+        long_trades += 1
+        if profitl[-1] > 0:
+            win_rate += 1
     else:
         print("Nothing")
         
 print('\n' + "Total profit: " + str(sum(profitl)))
 print("Max profit: " + str(max(profitl)))
 print("Min profit: " + str(min(profitl)))
+print("Short trades: " + str(short_trades))
+print("Long trades: " + str(long_trades))
+print("Win rate: %" + str(win_rate/len(profitl)))
 #plot close_diff and the df[date] values
 plt.plot(df['date'], df['Close_diff'])
 
